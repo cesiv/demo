@@ -1,0 +1,36 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: MSA
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+  schedule:
+    # GitHub Actions 使用的是UTC时间，比北京时间慢八个小时
+    # 例：如需调整为14:30， 将45改为30即可
+    # 设置仅周内运行，将最后一个'*'改为'1-5'
+    - cron: '40 15 * * *'
+
+jobs:
+  LOF:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: szenius/set-timezone@v1.0
+      with:
+       timezoneLinux: "Asia/Singapore"
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+        timezoneLinux: "Asia/Hongkong"
+    - name: Run MSA script
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests pytz datetime configparser pandas numpy tushare  flask 
+        python ./notify.py >> /dev/null
