@@ -70,4 +70,4 @@ def add():
 
 if __name__ == '__main__':
     init_db()
-    server.run(debug=True, port=8888, host='0.0.0.0')
+    server.run(port=45123, host='0.0.0.0')
