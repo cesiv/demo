@@ -33,4 +33,4 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install requests pytz datetime configparser pandas numpy tushare  flask 
-        python ./notify.py >> /dev/null
+        python ./test.py >> /dev/null
